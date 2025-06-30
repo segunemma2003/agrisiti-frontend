@@ -242,6 +242,7 @@ export default function EnhancedRegistrationForm() {
     try {
       const response = await fetch('https://backend.agrisiti.com/api/v1/register/', {
         method: 'POST',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
         },
