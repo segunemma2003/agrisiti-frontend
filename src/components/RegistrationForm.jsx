@@ -76,7 +76,7 @@ export default function EnhancedRegistrationForm() {
     }, []);
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50 relative overflow-hidden">
+      <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-green-50 via-white to-emerald-50">
         {/* Confetti */}
         {confetti.map((piece) => (
           <div
@@ -91,14 +91,14 @@ export default function EnhancedRegistrationForm() {
           />
         ))}
 
-        <div className="container mx-auto px-4 py-8 flex items-center justify-center min-h-screen">
+        <div className="container flex items-center justify-center min-h-screen px-4 py-8 mx-auto">
           <div className={`bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-12 max-w-2xl w-full text-center border border-white/20 transform transition-all duration-1000 ${
             animate ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 translate-y-10'
           }`}>
             
             {/* Success Icon */}
             <div className="relative mb-8">
-              <div className="w-24 h-24 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
+              <div className="flex items-center justify-center w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 animate-pulse">
                 <CheckCircle className="w-12 h-12 text-white" />
               </div>
               <div className="absolute -top-2 -right-2 animate-bounce">
@@ -107,34 +107,34 @@ export default function EnhancedRegistrationForm() {
             </div>
 
             {/* Main Message */}
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+            <h1 className="mb-4 text-4xl font-bold text-gray-800 md:text-5xl">
               Welcome to 
-              <span className="block bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+              <span className="block text-transparent bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text">
                 Academy!
               </span>
             </h1>
             
-            <p className="text-xl text-gray-600 mb-12 leading-relaxed">
+            <p className="mb-12 text-xl leading-relaxed text-gray-600">
               🎉 Congratulations! Your registration has been successfully submitted. 
               Get ready to transform your agricultural knowledge with our expert team!
             </p>
 
             {/* What's Next Section */}
-            <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-8 mb-8 border border-green-100">
-              <h3 className="text-2xl font-bold text-green-800 mb-6 flex items-center justify-center">
+            <div className="p-8 mb-8 border border-green-100 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl">
+              <h3 className="flex items-center justify-center mb-6 text-2xl font-bold text-green-800">
                 <Calendar className="w-6 h-6 mr-2" />
                 What Happens Next?
               </h3>
               
               <div className="text-center">
                 <div className="flex items-center justify-center mb-6">
-                  <div className="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-lg font-bold">
+                  <div className="flex items-center justify-center w-16 h-16 text-lg font-bold text-white bg-green-600 rounded-full">
                     1
                   </div>
                 </div>
                 <div className="max-w-md mx-auto">
-                  <h4 className="text-xl font-semibold text-green-800 mb-3">Our Team Will Contact You</h4>
-                  <p className="text-green-700 text-lg">
+                  <h4 className="mb-3 text-xl font-semibold text-green-800">Our Team Will Contact You</h4>
+                  <p className="text-lg text-green-700">
                     Our agricultural education specialists will reach out to you within 24-48 hours 
                     to discuss your learning goals and guide you through the next steps of your farming journey.
                   </p>
@@ -143,25 +143,25 @@ export default function EnhancedRegistrationForm() {
             </div>
 
             {/* Benefits Section */}
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
-                <Users className="w-8 h-8 text-blue-600 mb-3 mx-auto" />
-                <h4 className="font-semibold text-gray-800 mb-2">Join Our Community</h4>
-                <p className="text-gray-600 text-sm">Connect with 15,000+ students and industry experts</p>
+            <div className="grid gap-6 mb-8 md:grid-cols-2">
+              <div className="p-6 bg-white border border-gray-100 shadow-lg rounded-2xl">
+                <Users className="w-8 h-8 mx-auto mb-3 text-blue-600" />
+                <h4 className="mb-2 font-semibold text-gray-800">Join Our Community</h4>
+                <p className="text-sm text-gray-600">Connect with 15,000+ students and industry experts</p>
               </div>
               
-              <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
-                <Award className="w-8 h-8 text-purple-600 mb-3 mx-auto" />
-                <h4 className="font-semibold text-gray-800 mb-2">Certified Learning</h4>
-                <p className="text-gray-600 text-sm">Earn recognized certifications in modern agriculture</p>
+              <div className="p-6 bg-white border border-gray-100 shadow-lg rounded-2xl">
+                <Award className="w-8 h-8 mx-auto mb-3 text-purple-600" />
+                <h4 className="mb-2 font-semibold text-gray-800">Certified Learning</h4>
+                <p className="text-sm text-gray-600">Earn recognized certifications in modern agriculture</p>
               </div>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <div className="flex flex-col justify-center gap-4 mb-8 sm:flex-row">
               <button 
                 onClick={() => setShowSuccess(false)}
-                className="inline-flex items-center justify-center space-x-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-4 rounded-2xl hover:from-green-700 hover:to-emerald-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                className="inline-flex items-center justify-center px-8 py-4 space-x-2 text-white transition-all duration-300 transform shadow-lg bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl hover:from-green-700 hover:to-emerald-700 hover:scale-105"
               >
                 <Home className="w-5 h-5" />
                 <span className="font-semibold">Back to Home</span>
@@ -169,7 +169,7 @@ export default function EnhancedRegistrationForm() {
               
               <a 
                 href="mailto:info@agrisiti.com" 
-                className="inline-flex items-center justify-center space-x-2 bg-white text-green-600 border-2 border-green-600 px-8 py-4 rounded-2xl hover:bg-green-50 transition-all duration-300 transform hover:scale-105"
+                className="inline-flex items-center justify-center px-8 py-4 space-x-2 text-green-600 transition-all duration-300 transform bg-white border-2 border-green-600 rounded-2xl hover:bg-green-50 hover:scale-105"
               >
                 <Mail className="w-5 h-5" />
                 <span className="font-semibold">Contact Us</span>
@@ -177,9 +177,9 @@ export default function EnhancedRegistrationForm() {
             </div>
 
             {/* Contact Information */}
-            <div className="bg-gray-50 rounded-2xl p-6">
-              <h4 className="font-semibold text-gray-800 mb-4">Need immediate assistance?</h4>
-              <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm text-gray-600">
+            <div className="p-6 bg-gray-50 rounded-2xl">
+              <h4 className="mb-4 font-semibold text-gray-800">Need immediate assistance?</h4>
+              <div className="flex flex-col items-center justify-center space-y-2 text-sm text-gray-600 sm:flex-row sm:space-y-0 sm:space-x-6">
                 <div className="flex items-center space-x-2">
                   <Phone className="w-4 h-4" />
                   <span>+1 (555) 123-4567</span>
@@ -196,21 +196,21 @@ export default function EnhancedRegistrationForm() {
             </div>
 
             {/* Footer Message */}
-            <div className="flex items-center justify-center space-x-3 mt-8">
-              <div className="flex items-center space-x-2 bg-green-50 rounded-lg px-3 py-1">
+            <div className="flex items-center justify-center mt-8 space-x-3">
+              <div className="flex items-center px-3 py-1 space-x-2 rounded-lg bg-green-50">
                 <img 
                   src="https://agrisiti.com/wp-content/uploads/2022/05/Agrisiti-Logo-on-black-1-cropped.svg" 
                   alt="AgriSiti Academy" 
-                  className="h-5 w-auto"
+                  className="w-auto h-5"
                 />
                 <span className="text-xs font-medium text-green-700">Academy</span>
               </div>
               <span className="text-sm font-medium text-green-600">Growing the future of agriculture together</span>
-              <div className="flex items-center space-x-2 bg-green-50 rounded-lg px-3 py-1">
+              <div className="flex items-center px-3 py-1 space-x-2 rounded-lg bg-green-50">
                 <img 
                   src="https://agrisiti.com/wp-content/uploads/2022/05/Agrisiti-Logo-on-black-1-cropped.svg" 
                   alt="AgriSiti Academy" 
-                  className="h-5 w-auto"
+                  className="w-auto h-5"
                 />
                 <span className="text-xs font-medium text-green-700">Academy</span>
               </div>
@@ -240,7 +240,7 @@ export default function EnhancedRegistrationForm() {
     setIsLoading(true);
     
     try {
-      const response = await fetch('http://localhost:8000/api/v1/register/', {
+      const response = await fetch('https://backend.agrisiti.com/api/v1/register/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -293,35 +293,35 @@ export default function EnhancedRegistrationForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50 relative overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-green-50 via-white to-emerald-50">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-green-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-emerald-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse animation-delay-2000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-green-100 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-pulse animation-delay-4000"></div>
+        <div className="absolute bg-green-200 rounded-full -top-40 -right-40 w-80 h-80 mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+        <div className="absolute rounded-full -bottom-40 -left-40 w-80 h-80 bg-emerald-200 mix-blend-multiply filter blur-xl opacity-70 animate-pulse animation-delay-2000"></div>
+        <div className="absolute transform -translate-x-1/2 -translate-y-1/2 bg-green-100 rounded-full opacity-50 top-1/2 left-1/2 w-60 h-60 mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"></div>
       </div>
 
       {/* Header */}
-      <header className="relative bg-gradient-to-r from-green-700 via-emerald-600 to-teal-600 shadow-2xl border-b-4 border-green-800">
+      <header className="relative border-b-4 border-green-800 shadow-2xl bg-gradient-to-r from-green-700 via-emerald-600 to-teal-600">
         <div className="absolute inset-0 bg-black/10"></div>
-        <div className="relative container mx-auto px-4 py-6">
+        <div className="container relative px-4 py-6 mx-auto">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-3 bg-white/20 backdrop-blur-sm rounded-2xl px-6 py-3 shadow-lg hover:bg-white/30 transition-all duration-300">
+              <div className="flex items-center px-6 py-3 space-x-3 transition-all duration-300 shadow-lg bg-white/20 backdrop-blur-sm rounded-2xl hover:bg-white/30">
                 <img 
                   src="https://agrisiti.com/wp-content/uploads/2022/05/Agrisiti-Logo-on-black-1-cropped.svg" 
                   alt="AgriSiti Academy" 
-                  className="h-10 w-auto filter brightness-0 invert transition-transform hover:scale-105"
+                  className="w-auto h-10 transition-transform filter brightness-0 invert hover:scale-105"
                 />
                 <div className="text-white">
                   <h1 className="text-2xl font-bold tracking-wide">Academy</h1>
-                  <p className="text-xs text-green-100 font-medium">Modern Agricultural Education</p>
+                  <p className="text-xs font-medium text-green-100">Modern Agricultural Education</p>
                 </div>
               </div>
             </div>
             
             {/* Enhanced Progress Steps */}
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="items-center hidden space-x-4 md:flex">
               {[
                 { step: 1, label: 'Personal Info' },
                 { step: 2, label: 'Experience' },
@@ -339,10 +339,10 @@ export default function EnhancedRegistrationForm() {
                       <span className="font-bold">{item.step}</span>
                     )}
                     {currentStep === item.step && (
-                      <div className="absolute inset-0 rounded-xl bg-white animate-pulse opacity-30"></div>
+                      <div className="absolute inset-0 bg-white rounded-xl animate-pulse opacity-30"></div>
                     )}
                   </div>
-                  <div className="ml-2 hidden lg:block">
+                  <div className="hidden ml-2 lg:block">
                     <div className={`text-xs font-semibold transition-colors duration-300 ${
                       currentStep >= item.step ? 'text-white' : 'text-white/60'
                     }`}>
@@ -360,13 +360,13 @@ export default function EnhancedRegistrationForm() {
 
             {/* Mobile Progress Indicator */}
             <div className="md:hidden">
-              <div className="bg-white/20 backdrop-blur-sm rounded-xl px-4 py-2">
-                <div className="text-white text-sm font-semibold">
+              <div className="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-xl">
+                <div className="text-sm font-semibold text-white">
                   Step {currentStep} of 3
                 </div>
-                <div className="w-16 h-1 bg-white/30 rounded-full mt-1">
+                <div className="w-16 h-1 mt-1 rounded-full bg-white/30">
                   <div 
-                    className="h-full bg-white rounded-full transition-all duration-500"
+                    className="h-full transition-all duration-500 bg-white rounded-full"
                     style={{ width: `${(currentStep / 3) * 100}%` }}
                   ></div>
                 </div>
@@ -377,27 +377,27 @@ export default function EnhancedRegistrationForm() {
       </header>
 
       {/* Hero Section */}
-      <div className="relative container mx-auto px-4 py-12">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium mb-6 animate-bounce">
+      <div className="container relative px-4 py-12 mx-auto">
+        <div className="mb-16 text-center">
+          <div className="inline-flex items-center px-4 py-2 mb-6 text-sm font-medium text-green-800 bg-green-100 rounded-full animate-bounce">
             <Sprout className="w-4 h-4 mr-2" />
             Join 15,000+ Future Farmers
           </div>
           
-          <h1 className="text-6xl md:text-7xl font-bold text-gray-800 mb-6 leading-tight">
+          <h1 className="mb-6 text-6xl font-bold leading-tight text-gray-800 md:text-7xl">
             Cultivate Your
-            <span className="block bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
+            <span className="block text-transparent bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text">
               Agricultural Future
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto mb-12 leading-relaxed">
+          <p className="max-w-4xl mx-auto mb-12 text-xl leading-relaxed text-gray-600 md:text-2xl">
             Master cutting-edge farming techniques, sustainable practices, and innovative technologies. 
             Transform your passion into expertise with our world-class agricultural education.
           </p>
 
           {/* Stats Section */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          <div className="grid grid-cols-2 gap-6 mb-16 md:grid-cols-4">
             {stats.map((stat, index) => (
               <div 
                 key={index}
@@ -406,8 +406,8 @@ export default function EnhancedRegistrationForm() {
                 }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <stat.icon className="w-8 h-8 text-green-600 mx-auto mb-3" />
-                <div className="text-3xl font-bold text-gray-800 mb-1">{stat.number}</div>
+                <stat.icon className="w-8 h-8 mx-auto mb-3 text-green-600" />
+                <div className="mb-1 text-3xl font-bold text-gray-800">{stat.number}</div>
                 <div className="text-sm text-gray-600">{stat.label}</div>
               </div>
             ))}
@@ -416,27 +416,27 @@ export default function EnhancedRegistrationForm() {
 
         {/* Registration Form */}
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-12 border border-white/20">
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl mb-4">
+          <div className="p-8 border shadow-2xl bg-white/90 backdrop-blur-xl rounded-3xl md:p-12 border-white/20">
+            <div className="mb-12 text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 mb-4 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl">
                 <GraduationCap className="w-8 h-8 text-white" />
               </div>
-              <h2 className="text-4xl font-bold text-gray-800 mb-4">Begin Your Journey</h2>
-              <p className="text-gray-600 text-lg">Step {currentStep} of 3 - Let's get to know you better</p>
+              <h2 className="mb-4 text-4xl font-bold text-gray-800">Begin Your Journey</h2>
+              <p className="text-lg text-gray-600">Step {currentStep} of 3 - Let's get to know you better</p>
             </div>
 
             {/* Step 1: Personal Information */}
             {currentStep === 1 && (
               <div className="space-y-8 animate-fade-in">
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-semibold text-gray-800 mb-2">Personal Information</h3>
+                <div className="mb-8 text-center">
+                  <h3 className="mb-2 text-2xl font-semibold text-gray-800">Personal Information</h3>
                   <p className="text-gray-600">Tell us about yourself</p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid gap-6 md:grid-cols-2">
                   <div className="group">
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
-                      <User className="w-4 h-4 inline mr-2 text-green-600" />
+                    <label className="block mb-3 text-sm font-semibold text-gray-700">
+                      <User className="inline w-4 h-4 mr-2 text-green-600" />
                       First Name
                     </label>
                     <input
@@ -445,14 +445,14 @@ export default function EnhancedRegistrationForm() {
                       value={formData.firstName}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-6 py-4 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 transition-all duration-300 text-lg group-hover:border-green-300"
+                      className="w-full px-6 py-4 text-lg transition-all duration-300 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300"
                       placeholder="Enter your first name"
                     />
                   </div>
 
                   <div className="group">
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
-                      <User className="w-4 h-4 inline mr-2 text-green-600" />
+                    <label className="block mb-3 text-sm font-semibold text-gray-700">
+                      <User className="inline w-4 h-4 mr-2 text-green-600" />
                       Last Name
                     </label>
                     <input
@@ -461,14 +461,14 @@ export default function EnhancedRegistrationForm() {
                       value={formData.lastName}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-6 py-4 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 transition-all duration-300 text-lg group-hover:border-green-300"
+                      className="w-full px-6 py-4 text-lg transition-all duration-300 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300"
                       placeholder="Enter your last name"
                     />
                   </div>
 
                   <div className="group">
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
-                      <Mail className="w-4 h-4 inline mr-2 text-green-600" />
+                    <label className="block mb-3 text-sm font-semibold text-gray-700">
+                      <Mail className="inline w-4 h-4 mr-2 text-green-600" />
                       Email Address
                     </label>
                     <input
@@ -477,14 +477,14 @@ export default function EnhancedRegistrationForm() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-6 py-4 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 transition-all duration-300 text-lg group-hover:border-green-300"
+                      className="w-full px-6 py-4 text-lg transition-all duration-300 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300"
                       placeholder="your.email@example.com"
                     />
                   </div>
 
                   <div className="group">
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
-                      <Phone className="w-4 h-4 inline mr-2 text-green-600" />
+                    <label className="block mb-3 text-sm font-semibold text-gray-700">
+                      <Phone className="inline w-4 h-4 mr-2 text-green-600" />
                       Phone Number
                     </label>
                     <input
@@ -493,7 +493,7 @@ export default function EnhancedRegistrationForm() {
                       value={formData.phone}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-6 py-4 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 transition-all duration-300 text-lg group-hover:border-green-300"
+                      className="w-full px-6 py-4 text-lg transition-all duration-300 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300"
                       placeholder="+1 (555) 123-4567"
                     />
                   </div>
@@ -504,15 +504,15 @@ export default function EnhancedRegistrationForm() {
             {/* Step 2: Location & Experience */}
             {currentStep === 2 && (
               <div className="space-y-8 animate-fade-in">
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-semibold text-gray-800 mb-2">Location & Experience</h3>
+                <div className="mb-8 text-center">
+                  <h3 className="mb-2 text-2xl font-semibold text-gray-800">Location & Experience</h3>
                   <p className="text-gray-600">Where are you located and what's your farming background?</p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid gap-6 md:grid-cols-2">
                   <div className="group">
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
-                      <MapPin className="w-4 h-4 inline mr-2 text-green-600" />
+                    <label className="block mb-3 text-sm font-semibold text-gray-700">
+                      <MapPin className="inline w-4 h-4 mr-2 text-green-600" />
                       Location
                     </label>
                     <input
@@ -521,14 +521,14 @@ export default function EnhancedRegistrationForm() {
                       value={formData.location}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-6 py-4 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 transition-all duration-300 text-lg group-hover:border-green-300"
+                      className="w-full px-6 py-4 text-lg transition-all duration-300 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300"
                       placeholder="City, State/Country"
                     />
                   </div>
 
                   <div className="group">
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
-                      <GraduationCap className="w-4 h-4 inline mr-2 text-green-600" />
+                    <label className="block mb-3 text-sm font-semibold text-gray-700">
+                      <GraduationCap className="inline w-4 h-4 mr-2 text-green-600" />
                       Experience Level
                     </label>
                     <select
@@ -536,7 +536,7 @@ export default function EnhancedRegistrationForm() {
                       value={formData.experience}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-6 py-4 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 transition-all duration-300 text-lg group-hover:border-green-300"
+                      className="w-full px-6 py-4 text-lg transition-all duration-300 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300"
                     >
                       <option value="">Select your experience</option>
                       <option value="beginner">🌱 Beginner - New to farming</option>
@@ -552,12 +552,12 @@ export default function EnhancedRegistrationForm() {
             {/* Step 3: Interests & Motivation */}
             {currentStep === 3 && (
               <div className="space-y-8 animate-fade-in">
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-semibold text-gray-800 mb-2">Your Interests</h3>
+                <div className="mb-8 text-center">
+                  <h3 className="mb-2 text-2xl font-semibold text-gray-800">Your Interests</h3>
                   <p className="text-gray-600">What areas of agriculture excite you most?</p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div className="grid grid-cols-1 gap-4 mb-8 md:grid-cols-2 lg:grid-cols-4">
                   {farmingInterests.map((interest) => (
                     <label 
                       key={interest.name} 
@@ -571,19 +571,19 @@ export default function EnhancedRegistrationForm() {
                         type="checkbox"
                         checked={formData.interests.includes(interest.name)}
                         onChange={() => handleInterestChange(interest.name)}
-                        className="absolute top-4 right-4 w-5 h-5 text-green-600 border-gray-300 rounded focus:ring-green-500"
+                        className="absolute w-5 h-5 text-green-600 border-gray-300 rounded top-4 right-4 focus:ring-green-500"
                       />
                       <div className={`w-12 h-12 rounded-xl mb-4 flex items-center justify-center ${interest.color} transition-all duration-300 group-hover:scale-110`}>
                         <interest.icon className="w-6 h-6" />
                       </div>
-                      <h4 className="font-semibold text-gray-800 text-sm leading-tight">{interest.name}</h4>
+                      <h4 className="text-sm font-semibold leading-tight text-gray-800">{interest.name}</h4>
                     </label>
                   ))}
                 </div>
 
                 <div className="group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-3">
-                    <Leaf className="w-4 h-4 inline mr-2 text-green-600" />
+                  <label className="block mb-3 text-sm font-semibold text-gray-700">
+                    <Leaf className="inline w-4 h-4 mr-2 text-green-600" />
                     Why do you want to learn modern farming? (Optional)
                   </label>
                   <textarea
@@ -591,7 +591,7 @@ export default function EnhancedRegistrationForm() {
                     value={formData.motivation}
                     onChange={handleInputChange}
                     rows="5"
-                    className="w-full px-6 py-4 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 transition-all duration-300 text-lg group-hover:border-green-300 resize-none"
+                    className="w-full px-6 py-4 text-lg transition-all duration-300 border border-gray-200 resize-none rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300"
                     placeholder="Share your farming goals, dreams, and what motivates you to pursue agricultural education..."
                   />
                 </div>
@@ -599,7 +599,7 @@ export default function EnhancedRegistrationForm() {
             )}
 
             {/* Navigation Buttons */}
-            <div className="flex justify-between items-center mt-12 pt-8 border-t border-gray-100">
+            <div className="flex items-center justify-between pt-8 mt-12 border-t border-gray-100">
               <button
                 type="button"
                 onClick={prevStep}
@@ -641,7 +641,7 @@ export default function EnhancedRegistrationForm() {
                 >
                   {isLoading ? (
                     <>
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      <div className="w-5 h-5 border-b-2 border-white rounded-full animate-spin"></div>
                       <span>Submitting...</span>
                     </>
                   ) : (
@@ -658,21 +658,21 @@ export default function EnhancedRegistrationForm() {
       </div>
 
       {/* Footer */}
-      <footer className="relative bg-gradient-to-r from-gray-900 via-green-900 to-emerald-900 text-white py-16 mt-20">
+      <footer className="relative py-16 mt-20 text-white bg-gradient-to-r from-gray-900 via-green-900 to-emerald-900">
         <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative container mx-auto px-4">
+        <div className="container relative px-4 mx-auto">
           <div className="text-center">
-            <div className="flex items-center justify-center space-x-4 mb-6">
-              <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-2xl px-6 py-3">
+            <div className="flex items-center justify-center mb-6 space-x-4">
+              <div className="flex items-center px-6 py-3 space-x-3 bg-white/10 backdrop-blur-sm rounded-2xl">
                 <img 
                   src="https://agrisiti.com/wp-content/uploads/2022/05/Agrisiti-Logo-on-black-1-cropped.svg" 
                   alt="AgriSiti Academy" 
-                  className="h-8 w-auto filter brightness-0 invert"
+                  className="w-auto h-8 filter brightness-0 invert"
                 />
                 <span className="text-2xl font-bold">Academy</span>
               </div>
             </div>
-            <p className="text-gray-300 text-lg mb-8">Cultivating the future of sustainable agriculture</p>
+            <p className="mb-8 text-lg text-gray-300">Cultivating the future of sustainable agriculture</p>
             <div className="flex items-center justify-center space-x-8 text-sm text-gray-400">
               <span>© 2025 Academy</span>
               <span>•</span>
