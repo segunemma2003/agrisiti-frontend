@@ -524,283 +524,379 @@ export default function EnhancedRegistrationForm() {
                         }`}
                         placeholder="Enter student's first name"
                       />
-                      {errors.age && <p className="mt-2 text-sm text-red-600">{errors.age}</p>}
+                      {errors.firstName && <p className="mt-2 text-sm text-red-600">{errors.firstName}</p>}
                     </div>
 
-                    <div className="group md:col-span-2">
-                      <label className="block mb-3 text-sm font-semibold text-gray-700">
-                        <Building className="inline w-4 h-4 mr-2 text-green-600" />
-                        School Name *
-                      </label>
-                      <input
-                        type="text"
-                        name="schoolName"
-                        value={formData.schoolName}
-                        onChange={handleInputChange}
-                        required
-                        className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
-                          errors.schoolName ? 'border-red-500' : 'border-gray-200'
-                        }`}
-                        placeholder="Enter student's school name"
-                      />
-                      {errors.schoolName && <p className="mt-2 text-sm text-red-600">{errors.schoolName}</p>}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Step 2: Parent Information & Location */}
-              {currentStep === 2 && (
-                <div className="space-y-8 animate-fade-in">
-                  <div className="mb-8 text-center">
-                    <h3 className="mb-2 text-2xl font-semibold text-gray-800">Parent Information & Location</h3>
-                    <p className="text-gray-600">Parent/Guardian contact details</p>
-                  </div>
-
-                  <div className="grid gap-6 md:grid-cols-2">
                     <div className="group">
                       <label className="block mb-3 text-sm font-semibold text-gray-700">
                         <User className="inline w-4 h-4 mr-2 text-green-600" />
-                        Parent/Guardian Name *
+                        Student Last Name *
                       </label>
                       <input
                         type="text"
-                        name="parentName"
-                        value={formData.parentName}
+                        name="lastName"
+                        value={formData.lastName}
                         onChange={handleInputChange}
                         required
                         className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
-                          errors.parentName ? 'border-red-500' : 'border-gray-200'
+                          errors.lastName ? 'border-red-500' : 'border-gray-200'
                         }`}
-                        placeholder="Enter parent/guardian name"
+                        placeholder="Enter student's last name"
                       />
-                      {errors.parentName && <p className="mt-2 text-sm text-red-600">{errors.parentName}</p>}
-                    </div>
-
-                    <div className="group">
-                      <label className="block mb-3 text-sm font-semibold text-gray-700">
-                        <Phone className="inline w-4 h-4 mr-2 text-green-600" />
-                        Parent Phone Number *
-                      </label>
-                      <input
-                        type="tel"
-                        name="parentPhone"
-                        value={formData.parentPhone}
-                        onChange={handleInputChange}
-                        required
-                        className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
-                          errors.parentPhone ? 'border-red-500' : 'border-gray-200'
-                        }`}
-                        placeholder="+1 (555) 987-6543"
-                      />
-                      {errors.parentPhone && <p className="mt-2 text-sm text-red-600">{errors.parentPhone}</p>}
+                      {errors.lastName && <p className="mt-2 text-sm text-red-600">{errors.lastName}</p>}
                     </div>
 
                     <div className="group">
                       <label className="block mb-3 text-sm font-semibold text-gray-700">
                         <Mail className="inline w-4 h-4 mr-2 text-green-600" />
-                        Parent Email Address *
+                        Student Email Address *
                       </label>
                       <input
                         type="email"
-                        name="parentEmail"
-                        value={formData.parentEmail}
+                        name="email"
+                        value={formData.email}
                         onChange={handleInputChange}
                         required
                         className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
-                          errors.parentEmail ? 'border-red-500' : 'border-gray-200'
+                          errors.email ? 'border-red-500' : 'border-gray-200'
                         }`}
-                        placeholder="parent.email@example.com"
+                        placeholder="student.email@example.com"
                       />
-                      {errors.parentEmail && <p className="mt-2 text-sm text-red-600">{errors.parentEmail}</p>}
+                      {errors.email && <p className="mt-2 text-sm text-red-600">{errors.email}</p>}
                     </div>
 
                     <div className="group">
                       <label className="block mb-3 text-sm font-semibold text-gray-700">
-                        <MapPin className="inline w-4 h-4 mr-2 text-green-600" />
-                        Location *
+                        <Phone className="inline w-4 h-4 mr-2 text-green-600" />
+                        Student Phone Number *
                       </label>
                       <input
-                        type="text"
-                        name="location"
-                        value={formData.location}
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
                         onChange={handleInputChange}
                         required
                         className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
-                          errors.location ? 'border-red-500' : 'border-gray-200'
+                          errors.phone ? 'border-red-500' : 'border-gray-200'
                         }`}
-                        placeholder="City, State/Country"
+                        placeholder="+1 (555) 123-4567"
                       />
-                      {errors.location && <p className="mt-2 text-sm text-red-600">{errors.location}</p>}
+                      {errors.phone && <p className="mt-2 text-sm text-red-600">{errors.phone}</p>}
                     </div>
-                  </div>
-                </div>
-              )}
 
-              {/* Step 3: Experience & Interests */}
-              {currentStep === 3 && (
-                <div className="space-y-8 animate-fade-in">
-                  <div className="mb-8 text-center">
-                    <h3 className="mb-2 text-2xl font-semibold text-gray-800">Experience & Interests</h3>
-                    <p className="text-gray-600">What's your agricultural background and interests?</p>
-                  </div>
-
-                  <div className="group">
-                    <label className="block mb-3 text-sm font-semibold text-gray-700">
-                      <GraduationCap className="inline w-4 h-4 mr-2 text-green-600" />
-                      Experience Level *
-                    </label>
-                    <select
-                      name="experience"
-                      value={formData.experience}
-                      onChange={handleInputChange}
-                      required
-                      className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
-                        errors.experience ? 'border-red-500' : 'border-gray-200'
-                      }`}
-                    >
-                      <option value="">Select your experience</option>
-                      <option value="beginner">🌱 Beginner - New to farming</option>
-                      <option value="intermediate">🌿 Intermediate - Some farming experience</option>
-                      <option value="advanced">🌳 Advanced - Experienced farmer</option>
-                      <option value="professional">🏆 Professional - Agricultural professional</option>
-                    </select>
-                    {errors.experience && <p className="mt-2 text-sm text-red-600">{errors.experience}</p>}
-                  </div>
-
-                  <div className="group">
-                    <label className="block mb-3 text-sm font-semibold text-gray-700">
-                      <Leaf className="inline w-4 h-4 mr-2 text-green-600" />
-                      Areas of Interest * (Select at least one)
-                    </label>
-                    <div className="grid grid-cols-1 gap-4 mb-4 md:grid-cols-2 lg:grid-cols-3">
-                      {farmingInterests.map((interest) => (
-                        <label 
-                          key={interest.name} 
-                          className={`cursor-pointer group relative overflow-hidden rounded-2xl p-6 border-2 transition-all duration-300 hover:scale-105 hover:shadow-lg ${
-                            formData.interests.includes(interest.name)
-                              ? 'border-green-500 bg-green-50 shadow-lg' 
-                              : 'border-gray-200 bg-white hover:border-green-300'
-                          }`}
-                        >
-                          <input
-                            type="checkbox"
-                            checked={formData.interests.includes(interest.name)}
-                            onChange={() => handleInterestChange(interest.name)}
-                            className="absolute w-5 h-5 text-green-600 border-gray-300 rounded top-4 right-4 focus:ring-green-500"
-                          />
-                          <div className={`w-12 h-12 rounded-xl mb-4 flex items-center justify-center ${interest.color} transition-all duration-300 group-hover:scale-110`}>
-                            <interest.icon className="w-6 h-6" />
-                          </div>
-                          <h4 className="text-sm font-semibold leading-tight text-gray-800">{interest.name}</h4>
-                        </label>
-                      ))}
+                    <div className="group">
+                      <label className="block mb-3 text-sm font-semibold text-gray-700">
+                        <Calendar className="inline w-4 h-4 mr-2 text-green-600" />
+                        Date of Birth *
+                      </label>
+                      <input
+                        type="date"
+                        name="dateOfBirth"
+                        value={formData.dateOfBirth}
+                        onChange={handleInputChange}
+                        required
+                        max={new Date(new Date().setFullYear(new Date().getFullYear() - 5)).toISOString().split('T')[0]}
+                        className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
+                          errors.dateOfBirth ? 'border-red-500' : 'border-gray-200'
+                        }`}
+                      />
+                      {errors.dateOfBirth && <p className="mt-2 text-sm text-red-600">{errors.dateOfBirth}</p>}
                     </div>
-                    {errors.interests && <p className="mt-2 text-sm text-red-600">{errors.interests}</p>}
-                  </div>
 
-                  <div className="group">
-                    <label className="block mb-3 text-sm font-semibold text-gray-700">
-                      <Leaf className="inline w-4 h-4 mr-2 text-green-600" />
-                      Why do you want to learn modern farming? (Optional)
-                    </label>
-                    <textarea
-                      name="motivation"
-                      value={formData.motivation}
-                      onChange={handleInputChange}
-                      rows="5"
-                      className="w-full px-6 py-4 text-lg transition-all duration-300 border border-gray-200 resize-none rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300"
-                      placeholder="Share your farming goals, dreams, and what motivates you to pursue agricultural education..."
-                    />
-                  </div>
+                    <div className="group">
+                      <label className="block mb-3 text-sm font-semibold text-gray-700">
+                        <UserCheck className="inline w-4 h-4 mr-2 text-green-600" />
+                        Age *
+                      </label>
+                      <input
+                        type="number"
+                        name="age"
+                        value={formData.age}
+                        onChange={handleInputChange}
+                        required
+                        min="5"
+                        max="100"
+                        className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
+                          errors.age ? 'border-red-500' : 'border-gray-200'
+                        }`}
+                        placeholder="Student's age"
+                        readOnly={formData.dateOfBirth}
+                      />
+                      {errors.age && <p className="mt-2 text-sm text-red-600">{errors.age}</p>}
+                      </div>
+                      <div className="group md:col-span-2">
+                  <label className="block mb-3 text-sm font-semibold text-gray-700">
+                    <Building className="inline w-4 h-4 mr-2 text-green-600" />
+                    School Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="schoolName"
+                    value={formData.schoolName}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
+                      errors.schoolName ? 'border-red-500' : 'border-gray-200'
+                    }`}
+                    placeholder="Enter student's school name"
+                  />
+                  {errors.schoolName && <p className="mt-2 text-sm text-red-600">{errors.schoolName}</p>}
                 </div>
-              )}
+              </div>
+            </div>
+          )}
 
-              {/* Navigation Buttons */}
-              <div className="flex items-center justify-between pt-8 mt-12 border-t border-gray-100">
-                <button
-                  type="button"
-                  onClick={prevStep}
-                  disabled={currentStep === 1}
-                  className={`flex items-center space-x-2 px-8 py-4 rounded-2xl font-semibold transition-all duration-300 ${
-                    currentStep === 1 
-                      ? 'text-gray-400 cursor-not-allowed' 
-                      : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'
+          {/* Step 2: Parent Information & Location */}
+          {currentStep === 2 && (
+            <div className="space-y-8 animate-fade-in">
+              <div className="mb-8 text-center">
+                <h3 className="mb-2 text-2xl font-semibold text-gray-800">Parent Information & Location</h3>
+                <p className="text-gray-600">Parent/Guardian contact details</p>
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="group">
+                  <label className="block mb-3 text-sm font-semibold text-gray-700">
+                    <User className="inline w-4 h-4 mr-2 text-green-600" />
+                    Parent/Guardian Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="parentName"
+                    value={formData.parentName}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
+                      errors.parentName ? 'border-red-500' : 'border-gray-200'
+                    }`}
+                    placeholder="Enter parent/guardian name"
+                  />
+                  {errors.parentName && <p className="mt-2 text-sm text-red-600">{errors.parentName}</p>}
+                </div>
+
+                <div className="group">
+                  <label className="block mb-3 text-sm font-semibold text-gray-700">
+                    <Phone className="inline w-4 h-4 mr-2 text-green-600" />
+                    Parent Phone Number *
+                  </label>
+                  <input
+                    type="tel"
+                    name="parentPhone"
+                    value={formData.parentPhone}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
+                      errors.parentPhone ? 'border-red-500' : 'border-gray-200'
+                    }`}
+                    placeholder="+1 (555) 987-6543"
+                  />
+                  {errors.parentPhone && <p className="mt-2 text-sm text-red-600">{errors.parentPhone}</p>}
+                </div>
+
+                <div className="group">
+                  <label className="block mb-3 text-sm font-semibold text-gray-700">
+                    <Mail className="inline w-4 h-4 mr-2 text-green-600" />
+                    Parent Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    name="parentEmail"
+                    value={formData.parentEmail}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
+                      errors.parentEmail ? 'border-red-500' : 'border-gray-200'
+                    }`}
+                    placeholder="parent.email@example.com"
+                  />
+                  {errors.parentEmail && <p className="mt-2 text-sm text-red-600">{errors.parentEmail}</p>}
+                </div>
+
+                <div className="group">
+                  <label className="block mb-3 text-sm font-semibold text-gray-700">
+                    <MapPin className="inline w-4 h-4 mr-2 text-green-600" />
+                    Location *
+                  </label>
+                  <input
+                    type="text"
+                    name="location"
+                    value={formData.location}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
+                      errors.location ? 'border-red-500' : 'border-gray-200'
+                    }`}
+                    placeholder="City, State/Country"
+                  />
+                  {errors.location && <p className="mt-2 text-sm text-red-600">{errors.location}</p>}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Step 3: Experience & Interests */}
+          {currentStep === 3 && (
+            <div className="space-y-8 animate-fade-in">
+              <div className="mb-8 text-center">
+                <h3 className="mb-2 text-2xl font-semibold text-gray-800">Experience & Interests</h3>
+                <p className="text-gray-600">What's your agricultural background and interests?</p>
+              </div>
+
+              <div className="group">
+                <label className="block mb-3 text-sm font-semibold text-gray-700">
+                  <GraduationCap className="inline w-4 h-4 mr-2 text-green-600" />
+                  Experience Level *
+                </label>
+                <select
+                  name="experience"
+                  value={formData.experience}
+                  onChange={handleInputChange}
+                  required
+                  className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
+                    errors.experience ? 'border-red-500' : 'border-gray-200'
                   }`}
                 >
-                  <ChevronRight className="w-5 h-5 rotate-180" />
-                  <span>Previous</span>
-                </button>
-
-                {currentStep < 3 ? (
-                  <button
-                    type="button"
-                    onClick={nextStep}
-                    disabled={!isStepValid()}
-                    className={`flex items-center space-x-2 px-8 py-4 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 ${
-                      isStepValid()
-                        ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg hover:shadow-xl' 
-                        : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                    }`}
-                  >
-                    <span>Continue</span>
-                    <ArrowRight className="w-5 h-5" />
-                  </button>
-                ) : (
-                  <button
-                    type="submit"
-                    disabled={isLoading || !isStepValid()}
-                    className={`flex items-center space-x-2 px-12 py-4 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 ${
-                      isStepValid() && !isLoading
-                        ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg hover:shadow-xl' 
-                        : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                    }`}
-                  >
-                    {isLoading ? (
-                      <>
-                        <div className="w-5 h-5 border-b-2 border-white rounded-full animate-spin"></div>
-                        <span>Submitting...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-5 h-5" />
-                        <span>Start Your Journey</span>
-                      </>
-                    )}
-                  </button>
-                )}
+                  <option value="">Select your experience</option>
+                  <option value="beginner">🌱 Beginner - New to farming</option>
+                  <option value="intermediate">🌿 Intermediate - Some farming experience</option>
+                  <option value="advanced">🌳 Advanced - Experienced farmer</option>
+                  <option value="professional">🏆 Professional - Agricultural professional</option>
+                </select>
+                {errors.experience && <p className="mt-2 text-sm text-red-600">{errors.experience}</p>}
               </div>
-            </form>
+
+              <div className="group">
+                <label className="block mb-3 text-sm font-semibold text-gray-700">
+                  <Leaf className="inline w-4 h-4 mr-2 text-green-600" />
+                  Areas of Interest * (Select at least one)
+                </label>
+                <div className="grid grid-cols-1 gap-4 mb-4 md:grid-cols-2 lg:grid-cols-3">
+                  {farmingInterests.map((interest) => (
+                    <label 
+                      key={interest.name} 
+                      className={`cursor-pointer group relative overflow-hidden rounded-2xl p-6 border-2 transition-all duration-300 hover:scale-105 hover:shadow-lg ${
+                        formData.interests.includes(interest.name)
+                          ? 'border-green-500 bg-green-50 shadow-lg' 
+                          : 'border-gray-200 bg-white hover:border-green-300'
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={formData.interests.includes(interest.name)}
+                        onChange={() => handleInterestChange(interest.name)}
+                        className="absolute w-5 h-5 text-green-600 border-gray-300 rounded top-4 right-4 focus:ring-green-500"
+                      />
+                      <div className={`w-12 h-12 rounded-xl mb-4 flex items-center justify-center ${interest.color} transition-all duration-300 group-hover:scale-110`}>
+                        <interest.icon className="w-6 h-6" />
+                      </div>
+                      <h4 className="text-sm font-semibold leading-tight text-gray-800">{interest.name}</h4>
+                    </label>
+                  ))}
+                </div>
+                {errors.interests && <p className="mt-2 text-sm text-red-600">{errors.interests}</p>}
+              </div>
+
+              <div className="group">
+                <label className="block mb-3 text-sm font-semibold text-gray-700">
+                  <Leaf className="inline w-4 h-4 mr-2 text-green-600" />
+                  Why do you want to learn modern farming? (Optional)
+                </label>
+                <textarea
+                  name="motivation"
+                  value={formData.motivation}
+                  onChange={handleInputChange}
+                  rows="5"
+                  className="w-full px-6 py-4 text-lg transition-all duration-300 border border-gray-200 resize-none rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300"
+                  placeholder="Share your farming goals, dreams, and what motivates you to pursue agricultural education..."
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Navigation Buttons */}
+          <div className="flex items-center justify-between pt-8 mt-12 border-t border-gray-100">
+            <button
+              type="button"
+              onClick={prevStep}
+              disabled={currentStep === 1}
+              className={`flex items-center space-x-2 px-8 py-4 rounded-2xl font-semibold transition-all duration-300 ${
+                currentStep === 1 
+                  ? 'text-gray-400 cursor-not-allowed' 
+                  : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'
+              }`}
+            >
+              <ChevronRight className="w-5 h-5 rotate-180" />
+              <span>Previous</span>
+            </button>
+
+            {currentStep < 3 ? (
+              <button
+                type="button"
+                onClick={nextStep}
+                disabled={!isStepValid()}
+                className={`flex items-center space-x-2 px-8 py-4 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 ${
+                  isStepValid()
+                    ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg hover:shadow-xl' 
+                    : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                }`}
+              >
+                <span>Continue</span>
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            ) : (
+              <button
+                type="submit"
+                disabled={isLoading || !isStepValid()}
+                className={`flex items-center space-x-2 px-12 py-4 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 ${
+                  isStepValid() && !isLoading
+                    ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg hover:shadow-xl' 
+                    : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                }`}
+              >
+                {isLoading ? (
+                  <>
+                    <div className="w-5 h-5 border-b-2 border-white rounded-full animate-spin"></div>
+                    <span>Submitting...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-5 h-5" />
+                    <span>Start Your Journey</span>
+                  </>
+                )}
+              </button>
+            )}
           </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {/* Footer */}
+  <footer className="relative py-16 mt-20 text-white bg-gradient-to-r from-gray-900 via-green-900 to-emerald-900">
+    <div className="absolute inset-0 bg-black/20"></div>
+    <div className="container relative px-4 mx-auto">
+      <div className="text-center">
+        <div className="flex items-center justify-center mb-6 space-x-4">
+          <div className="flex items-center px-6 py-3 space-x-3 bg-white/10 backdrop-blur-sm rounded-2xl">
+            <img 
+              src="https://agrisiti.com/wp-content/uploads/2022/05/Agrisiti-Logo-on-black-1-cropped.svg" 
+              alt="AgriSiti Academy" 
+              className="w-auto h-8 filter brightness-0 invert"
+            />
+            <span className="text-2xl font-bold">Academy</span>
+          </div>
+        </div>
+        <p className="mb-8 text-lg text-gray-300">Cultivating the future of sustainable agriculture</p>
+        <div className="flex items-center justify-center space-x-8 text-sm text-gray-400">
+          <span>© 2025 AgriSiti Academy</span>
+          <span>•</span>
+          <span>Transforming Agriculture</span>
+          <span>•</span>
+          <span>Growing Tomorrow</span>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="relative py-16 mt-20 text-white bg-gradient-to-r from-gray-900 via-green-900 to-emerald-900">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="container relative px-4 mx-auto">
-          <div className="text-center">
-            <div className="flex items-center justify-center mb-6 space-x-4">
-              <div className="flex items-center px-6 py-3 space-x-3 bg-white/10 backdrop-blur-sm rounded-2xl">
-                <img 
-                  src="https://agrisiti.com/wp-content/uploads/2022/05/Agrisiti-Logo-on-black-1-cropped.svg" 
-                  alt="AgriSiti Academy" 
-                  className="w-auto h-8 filter brightness-0 invert"
-                />
-                <span className="text-2xl font-bold">Academy</span>
-              </div>
-            </div>
-            <p className="mb-8 text-lg text-gray-300">Cultivating the future of sustainable agriculture</p>
-            <div className="flex items-center justify-center space-x-8 text-sm text-gray-400">
-              <span>© 2025 AgriSiti Academy</span>
-              <span>•</span>
-              <span>Transforming Agriculture</span>
-              <span>•</span>
-              <span>Growing Tomorrow</span>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
-  );
+  </footer>
+</div>);
 }
