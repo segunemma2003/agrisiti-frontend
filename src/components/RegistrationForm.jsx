@@ -3,16 +3,27 @@ import {
   User, Mail, Phone, MapPin, GraduationCap, Leaf, Send, 
   Sprout, Sun, CloudRain, Tractor, ChevronRight, Star,
   CheckCircle2, ArrowRight, Users, Award, Globe, CheckCircle, 
-  Home, Calendar, MessageCircle, Sparkles
+  Home, Calendar, MessageCircle, Sparkles, UserCheck, Building
 } from 'lucide-react';
 
 export default function EnhancedRegistrationForm() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState({
+    // Student Information
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
+    age: '',
+    dateOfBirth: '',
+    schoolName: '',
+    
+    // Parent Information
+    parentName: '',
+    parentPhone: '',
+    parentEmail: '',
+    
+    // Location & Experience
     location: '',
     experience: '',
     interests: [],
@@ -22,6 +33,7 @@ export default function EnhancedRegistrationForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [animateStats, setAnimateStats] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const farmingInterests = [
     { name: 'Crop Production', icon: Sprout, color: 'bg-green-100 text-green-700' },
@@ -31,7 +43,11 @@ export default function EnhancedRegistrationForm() {
     { name: 'Hydroponics', icon: CloudRain, color: 'bg-cyan-100 text-cyan-700' },
     { name: 'Organic Farming', icon: Sun, color: 'bg-yellow-100 text-yellow-700' },
     { name: 'Agricultural Technology', icon: Tractor, color: 'bg-orange-100 text-orange-700' },
-    { name: 'Farm Business Management', icon: Award, color: 'bg-red-100 text-red-700' }
+    { name: 'Farm Business Management', icon: Award, color: 'bg-red-100 text-red-700' },
+    { name: 'Poultry Farming', icon: Users, color: 'bg-indigo-100 text-indigo-700' },
+    { name: 'Fish Farming', icon: CloudRain, color: 'bg-teal-100 text-teal-700' },
+    { name: 'Beekeeping', icon: Sun, color: 'bg-amber-100 text-amber-700' },
+    { name: 'Greenhouse Management', icon: Building, color: 'bg-lime-100 text-lime-700' }
   ];
 
   const stats = [
@@ -46,12 +62,86 @@ export default function EnhancedRegistrationForm() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Calculate age from date of birth
+  const calculateAge = (dateOfBirth) => {
+    if (!dateOfBirth) return '';
+    const today = new Date();
+    const birthDate = new Date(dateOfBirth);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    
+    return age;
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
+
+    // Auto-calculate age when date of birth changes
+    if (name === 'dateOfBirth') {
+      const age = calculateAge(value);
+      setFormData(prev => ({
+        ...prev,
+        age: age.toString()
+      }));
+    }
+
+    // Clear errors when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
+  };
+
+  // Validation functions
+  const validateStep = (step) => {
+    const newErrors = {};
+
+    switch (step) {
+      case 1: // Student Information
+        if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
+        if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
+        if (!formData.email.trim()) newErrors.email = 'Email is required';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+          newErrors.email = 'Please enter a valid email address';
+        }
+        if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
+        if (!formData.age || formData.age < 5 || formData.age > 100) {
+          newErrors.age = 'Age must be between 5 and 100';
+        }
+        if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Date of birth is required';
+        if (!formData.schoolName.trim()) newErrors.schoolName = 'School name is required';
+        break;
+
+      case 2: // Parent Information
+        if (!formData.parentName.trim()) newErrors.parentName = 'Parent/Guardian name is required';
+        if (!formData.parentPhone.trim()) newErrors.parentPhone = 'Parent phone number is required';
+        if (!formData.parentEmail.trim()) newErrors.parentEmail = 'Parent email is required';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.parentEmail)) {
+          newErrors.parentEmail = 'Please enter a valid parent email address';
+        }
+        if (!formData.location.trim()) newErrors.location = 'Location is required';
+        break;
+
+      case 3: // Experience & Interests
+        if (!formData.experience) newErrors.experience = 'Please select your experience level';
+        if (formData.interests.length === 0) {
+          newErrors.interests = 'Please select at least one area of interest';
+        }
+        break;
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   // Success Page Component
@@ -110,7 +200,7 @@ export default function EnhancedRegistrationForm() {
             <h1 className="mb-4 text-4xl font-bold text-gray-800 md:text-5xl">
               Welcome to 
               <span className="block text-transparent bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text">
-                Academy!
+                AgriSiti Academy!
               </span>
             </h1>
             
@@ -142,21 +232,6 @@ export default function EnhancedRegistrationForm() {
               </div>
             </div>
 
-            {/* Benefits Section */}
-            <div className="grid gap-6 mb-8 md:grid-cols-2">
-              <div className="p-6 bg-white border border-gray-100 shadow-lg rounded-2xl">
-                <Users className="w-8 h-8 mx-auto mb-3 text-blue-600" />
-                <h4 className="mb-2 font-semibold text-gray-800">Join Our Community</h4>
-                <p className="text-sm text-gray-600">Connect with 15,000+ students and industry experts</p>
-              </div>
-              
-              <div className="p-6 bg-white border border-gray-100 shadow-lg rounded-2xl">
-                <Award className="w-8 h-8 mx-auto mb-3 text-purple-600" />
-                <h4 className="mb-2 font-semibold text-gray-800">Certified Learning</h4>
-                <p className="text-sm text-gray-600">Earn recognized certifications in modern agriculture</p>
-              </div>
-            </div>
-
             {/* Action Buttons */}
             <div className="flex flex-col justify-center gap-4 mb-8 sm:flex-row">
               <button 
@@ -166,54 +241,6 @@ export default function EnhancedRegistrationForm() {
                 <Home className="w-5 h-5" />
                 <span className="font-semibold">Back to Home</span>
               </button>
-              
-              <a 
-                href="mailto:info@agrisiti.com" 
-                className="inline-flex items-center justify-center px-8 py-4 space-x-2 text-green-600 transition-all duration-300 transform bg-white border-2 border-green-600 rounded-2xl hover:bg-green-50 hover:scale-105"
-              >
-                <Mail className="w-5 h-5" />
-                <span className="font-semibold">Contact Us</span>
-              </a>
-            </div>
-
-            {/* Contact Information */}
-            <div className="p-6 bg-gray-50 rounded-2xl">
-              <h4 className="mb-4 font-semibold text-gray-800">Need immediate assistance?</h4>
-              <div className="flex flex-col items-center justify-center space-y-2 text-sm text-gray-600 sm:flex-row sm:space-y-0 sm:space-x-6">
-                <div className="flex items-center space-x-2">
-                  <Phone className="w-4 h-4" />
-                  <span>+1 (555) 123-4567</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <MessageCircle className="w-4 h-4" />
-                  <span>Live Chat Available</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Mail className="w-4 h-4" />
-                  <span>support@agrisiti.com</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Footer Message */}
-            <div className="flex items-center justify-center mt-8 space-x-3">
-              <div className="flex items-center px-3 py-1 space-x-2 rounded-lg bg-green-50">
-                <img 
-                  src="https://agrisiti.com/wp-content/uploads/2022/05/Agrisiti-Logo-on-black-1-cropped.svg" 
-                  alt="AgriSiti Academy" 
-                  className="w-auto h-5"
-                />
-                <span className="text-xs font-medium text-green-700">Academy</span>
-              </div>
-              <span className="text-sm font-medium text-green-600">Growing the future of agriculture together</span>
-              <div className="flex items-center px-3 py-1 space-x-2 rounded-lg bg-green-50">
-                <img 
-                  src="https://agrisiti.com/wp-content/uploads/2022/05/Agrisiti-Logo-on-black-1-cropped.svg" 
-                  alt="AgriSiti Academy" 
-                  className="w-auto h-5"
-                />
-                <span className="text-xs font-medium text-green-700">Academy</span>
-              </div>
             </div>
           </div>
         </div>
@@ -233,36 +260,78 @@ export default function EnhancedRegistrationForm() {
         ? prev.interests.filter(i => i !== interest)
         : [...prev.interests, interest]
     }));
+
+    // Clear interests error when user selects an interest
+    if (errors.interests) {
+      setErrors(prev => ({
+        ...prev,
+        interests: ''
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!validateStep(3)) {
+      return;
+    }
+
     setIsLoading(true);
     
     try {
-      const response = await fetch('https://backend.agrisiti.com/api/v1/register/', {
+      const response = await fetch('https://backend.agrisiti.com/api/v1/register', {
         method: 'POST',
-        mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify({
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          email: formData.email,
-          phone: formData.phone,
-          location: formData.location,
+          first_name: formData.firstName.trim(),
+          last_name: formData.lastName.trim(),
+          email: formData.email.trim().toLowerCase(),
+          phone: formData.phone.trim(),
+          age: parseInt(formData.age),
+          date_of_birth: formData.dateOfBirth,
+          school_name: formData.schoolName.trim(),
+          parent_name: formData.parentName.trim(),
+          parent_phone: formData.parentPhone.trim(),
+          parent_email: formData.parentEmail.trim().toLowerCase(),
+          location: formData.location.trim(),
           experience_level: formData.experience,
           interests: formData.interests,
-          motivation: formData.motivation
+          motivation: formData.motivation.trim()
         })
       });
+
+      const data = await response.json();
 
       if (response.ok) {
         setShowSuccess(true);
       } else {
-        const errorData = await response.json();
-        alert(`Registration failed: ${errorData.message || 'Please try again.'}`);
+        // Handle validation errors from backend
+        if (data.errors) {
+          const backendErrors = {};
+          Object.keys(data.errors).forEach(key => {
+            const fieldMap = {
+              'first_name': 'firstName',
+              'last_name': 'lastName',
+              'parent_name': 'parentName',
+              'parent_phone': 'parentPhone',
+              'parent_email': 'parentEmail',
+              'school_name': 'schoolName',
+              'date_of_birth': 'dateOfBirth',
+              'experience_level': 'experience'
+            };
+            const frontendKey = fieldMap[key] || key;
+            backendErrors[frontendKey] = Array.isArray(data.errors[key]) 
+              ? data.errors[key][0] 
+              : data.errors[key];
+          });
+          setErrors(backendErrors);
+        } else {
+          alert(`Registration failed: ${data.message || 'Please try again.'}`);
+        }
       }
     } catch (error) {
       console.error('Error:', error);
@@ -273,7 +342,9 @@ export default function EnhancedRegistrationForm() {
   };
 
   const nextStep = () => {
-    if (currentStep < 3) setCurrentStep(currentStep + 1);
+    if (validateStep(currentStep)) {
+      setCurrentStep(currentStep + 1);
+    }
   };
 
   const prevStep = () => {
@@ -283,11 +354,12 @@ export default function EnhancedRegistrationForm() {
   const isStepValid = () => {
     switch (currentStep) {
       case 1:
-        return formData.firstName && formData.lastName && formData.email && formData.phone;
+        return formData.firstName && formData.lastName && formData.email && 
+               formData.phone && formData.age && formData.dateOfBirth && formData.schoolName;
       case 2:
-        return formData.location && formData.experience;
+        return formData.parentName && formData.parentPhone && formData.parentEmail && formData.location;
       case 3:
-        return formData.interests.length > 0;
+        return formData.experience && formData.interests.length > 0;
       default:
         return false;
     }
@@ -324,9 +396,9 @@ export default function EnhancedRegistrationForm() {
             {/* Enhanced Progress Steps */}
             <div className="items-center hidden space-x-4 md:flex">
               {[
-                { step: 1, label: 'Personal Info' },
-                { step: 2, label: 'Experience' },
-                { step: 3, label: 'Interests' }
+                { step: 1, label: 'Student Info' },
+                { step: 2, label: 'Parent Info' },
+                { step: 3, label: 'Experience' }
               ].map((item, index) => (
                 <div key={item.step} className="flex items-center">
                   <div className={`relative w-12 h-12 rounded-xl flex items-center justify-center text-sm font-bold transition-all duration-500 shadow-lg ${
@@ -426,118 +498,166 @@ export default function EnhancedRegistrationForm() {
               <p className="text-lg text-gray-600">Step {currentStep} of 3 - Let's get to know you better</p>
             </div>
 
-            {/* Step 1: Personal Information */}
-            {currentStep === 1 && (
-              <div className="space-y-8 animate-fade-in">
-                <div className="mb-8 text-center">
-                  <h3 className="mb-2 text-2xl font-semibold text-gray-800">Personal Information</h3>
-                  <p className="text-gray-600">Tell us about yourself</p>
-                </div>
-
-                <div className="grid gap-6 md:grid-cols-2">
-                  <div className="group">
-                    <label className="block mb-3 text-sm font-semibold text-gray-700">
-                      <User className="inline w-4 h-4 mr-2 text-green-600" />
-                      First Name
-                    </label>
-                    <input
-                      type="text"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-6 py-4 text-lg transition-all duration-300 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300"
-                      placeholder="Enter your first name"
-                    />
+            <form onSubmit={handleSubmit}>
+              {/* Step 1: Student Information */}
+              {currentStep === 1 && (
+                <div className="space-y-8 animate-fade-in">
+                  <div className="mb-8 text-center">
+                    <h3 className="mb-2 text-2xl font-semibold text-gray-800">Student Information</h3>
+                    <p className="text-gray-600">Tell us about the student</p>
                   </div>
 
-                  <div className="group">
-                    <label className="block mb-3 text-sm font-semibold text-gray-700">
-                      <User className="inline w-4 h-4 mr-2 text-green-600" />
-                      Last Name
-                    </label>
-                    <input
-                      type="text"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-6 py-4 text-lg transition-all duration-300 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300"
-                      placeholder="Enter your last name"
-                    />
-                  </div>
+                  <div className="grid gap-6 md:grid-cols-2">
+                    <div className="group">
+                      <label className="block mb-3 text-sm font-semibold text-gray-700">
+                        <User className="inline w-4 h-4 mr-2 text-green-600" />
+                        Student First Name *
+                      </label>
+                      <input
+                        type="text"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
+                        required
+                        className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
+                          errors.firstName ? 'border-red-500' : 'border-gray-200'
+                        }`}
+                        placeholder="Enter student's first name"
+                      />
+                      {errors.age && <p className="mt-2 text-sm text-red-600">{errors.age}</p>}
+                    </div>
 
-                  <div className="group">
-                    <label className="block mb-3 text-sm font-semibold text-gray-700">
-                      <Mail className="inline w-4 h-4 mr-2 text-green-600" />
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-6 py-4 text-lg transition-all duration-300 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300"
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-
-                  <div className="group">
-                    <label className="block mb-3 text-sm font-semibold text-gray-700">
-                      <Phone className="inline w-4 h-4 mr-2 text-green-600" />
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-6 py-4 text-lg transition-all duration-300 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300"
-                      placeholder="+1 (555) 123-4567"
-                    />
+                    <div className="group md:col-span-2">
+                      <label className="block mb-3 text-sm font-semibold text-gray-700">
+                        <Building className="inline w-4 h-4 mr-2 text-green-600" />
+                        School Name *
+                      </label>
+                      <input
+                        type="text"
+                        name="schoolName"
+                        value={formData.schoolName}
+                        onChange={handleInputChange}
+                        required
+                        className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
+                          errors.schoolName ? 'border-red-500' : 'border-gray-200'
+                        }`}
+                        placeholder="Enter student's school name"
+                      />
+                      {errors.schoolName && <p className="mt-2 text-sm text-red-600">{errors.schoolName}</p>}
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* Step 2: Location & Experience */}
-            {currentStep === 2 && (
-              <div className="space-y-8 animate-fade-in">
-                <div className="mb-8 text-center">
-                  <h3 className="mb-2 text-2xl font-semibold text-gray-800">Location & Experience</h3>
-                  <p className="text-gray-600">Where are you located and what's your farming background?</p>
+              {/* Step 2: Parent Information & Location */}
+              {currentStep === 2 && (
+                <div className="space-y-8 animate-fade-in">
+                  <div className="mb-8 text-center">
+                    <h3 className="mb-2 text-2xl font-semibold text-gray-800">Parent Information & Location</h3>
+                    <p className="text-gray-600">Parent/Guardian contact details</p>
+                  </div>
+
+                  <div className="grid gap-6 md:grid-cols-2">
+                    <div className="group">
+                      <label className="block mb-3 text-sm font-semibold text-gray-700">
+                        <User className="inline w-4 h-4 mr-2 text-green-600" />
+                        Parent/Guardian Name *
+                      </label>
+                      <input
+                        type="text"
+                        name="parentName"
+                        value={formData.parentName}
+                        onChange={handleInputChange}
+                        required
+                        className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
+                          errors.parentName ? 'border-red-500' : 'border-gray-200'
+                        }`}
+                        placeholder="Enter parent/guardian name"
+                      />
+                      {errors.parentName && <p className="mt-2 text-sm text-red-600">{errors.parentName}</p>}
+                    </div>
+
+                    <div className="group">
+                      <label className="block mb-3 text-sm font-semibold text-gray-700">
+                        <Phone className="inline w-4 h-4 mr-2 text-green-600" />
+                        Parent Phone Number *
+                      </label>
+                      <input
+                        type="tel"
+                        name="parentPhone"
+                        value={formData.parentPhone}
+                        onChange={handleInputChange}
+                        required
+                        className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
+                          errors.parentPhone ? 'border-red-500' : 'border-gray-200'
+                        }`}
+                        placeholder="+1 (555) 987-6543"
+                      />
+                      {errors.parentPhone && <p className="mt-2 text-sm text-red-600">{errors.parentPhone}</p>}
+                    </div>
+
+                    <div className="group">
+                      <label className="block mb-3 text-sm font-semibold text-gray-700">
+                        <Mail className="inline w-4 h-4 mr-2 text-green-600" />
+                        Parent Email Address *
+                      </label>
+                      <input
+                        type="email"
+                        name="parentEmail"
+                        value={formData.parentEmail}
+                        onChange={handleInputChange}
+                        required
+                        className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
+                          errors.parentEmail ? 'border-red-500' : 'border-gray-200'
+                        }`}
+                        placeholder="parent.email@example.com"
+                      />
+                      {errors.parentEmail && <p className="mt-2 text-sm text-red-600">{errors.parentEmail}</p>}
+                    </div>
+
+                    <div className="group">
+                      <label className="block mb-3 text-sm font-semibold text-gray-700">
+                        <MapPin className="inline w-4 h-4 mr-2 text-green-600" />
+                        Location *
+                      </label>
+                      <input
+                        type="text"
+                        name="location"
+                        value={formData.location}
+                        onChange={handleInputChange}
+                        required
+                        className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
+                          errors.location ? 'border-red-500' : 'border-gray-200'
+                        }`}
+                        placeholder="City, State/Country"
+                      />
+                      {errors.location && <p className="mt-2 text-sm text-red-600">{errors.location}</p>}
+                    </div>
+                  </div>
                 </div>
+              )}
 
-                <div className="grid gap-6 md:grid-cols-2">
-                  <div className="group">
-                    <label className="block mb-3 text-sm font-semibold text-gray-700">
-                      <MapPin className="inline w-4 h-4 mr-2 text-green-600" />
-                      Location
-                    </label>
-                    <input
-                      type="text"
-                      name="location"
-                      value={formData.location}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-6 py-4 text-lg transition-all duration-300 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300"
-                      placeholder="City, State/Country"
-                    />
+              {/* Step 3: Experience & Interests */}
+              {currentStep === 3 && (
+                <div className="space-y-8 animate-fade-in">
+                  <div className="mb-8 text-center">
+                    <h3 className="mb-2 text-2xl font-semibold text-gray-800">Experience & Interests</h3>
+                    <p className="text-gray-600">What's your agricultural background and interests?</p>
                   </div>
 
                   <div className="group">
                     <label className="block mb-3 text-sm font-semibold text-gray-700">
                       <GraduationCap className="inline w-4 h-4 mr-2 text-green-600" />
-                      Experience Level
+                      Experience Level *
                     </label>
                     <select
                       name="experience"
                       value={formData.experience}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-6 py-4 text-lg transition-all duration-300 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300"
+                      className={`w-full px-6 py-4 text-lg transition-all duration-300 border rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300 ${
+                        errors.experience ? 'border-red-500' : 'border-gray-200'
+                      }`}
                     >
                       <option value="">Select your experience</option>
                       <option value="beginner">🌱 Beginner - New to farming</option>
@@ -545,115 +665,112 @@ export default function EnhancedRegistrationForm() {
                       <option value="advanced">🌳 Advanced - Experienced farmer</option>
                       <option value="professional">🏆 Professional - Agricultural professional</option>
                     </select>
+                    {errors.experience && <p className="mt-2 text-sm text-red-600">{errors.experience}</p>}
+                  </div>
+
+                  <div className="group">
+                    <label className="block mb-3 text-sm font-semibold text-gray-700">
+                      <Leaf className="inline w-4 h-4 mr-2 text-green-600" />
+                      Areas of Interest * (Select at least one)
+                    </label>
+                    <div className="grid grid-cols-1 gap-4 mb-4 md:grid-cols-2 lg:grid-cols-3">
+                      {farmingInterests.map((interest) => (
+                        <label 
+                          key={interest.name} 
+                          className={`cursor-pointer group relative overflow-hidden rounded-2xl p-6 border-2 transition-all duration-300 hover:scale-105 hover:shadow-lg ${
+                            formData.interests.includes(interest.name)
+                              ? 'border-green-500 bg-green-50 shadow-lg' 
+                              : 'border-gray-200 bg-white hover:border-green-300'
+                          }`}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={formData.interests.includes(interest.name)}
+                            onChange={() => handleInterestChange(interest.name)}
+                            className="absolute w-5 h-5 text-green-600 border-gray-300 rounded top-4 right-4 focus:ring-green-500"
+                          />
+                          <div className={`w-12 h-12 rounded-xl mb-4 flex items-center justify-center ${interest.color} transition-all duration-300 group-hover:scale-110`}>
+                            <interest.icon className="w-6 h-6" />
+                          </div>
+                          <h4 className="text-sm font-semibold leading-tight text-gray-800">{interest.name}</h4>
+                        </label>
+                      ))}
+                    </div>
+                    {errors.interests && <p className="mt-2 text-sm text-red-600">{errors.interests}</p>}
+                  </div>
+
+                  <div className="group">
+                    <label className="block mb-3 text-sm font-semibold text-gray-700">
+                      <Leaf className="inline w-4 h-4 mr-2 text-green-600" />
+                      Why do you want to learn modern farming? (Optional)
+                    </label>
+                    <textarea
+                      name="motivation"
+                      value={formData.motivation}
+                      onChange={handleInputChange}
+                      rows="5"
+                      className="w-full px-6 py-4 text-lg transition-all duration-300 border border-gray-200 resize-none rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300"
+                      placeholder="Share your farming goals, dreams, and what motivates you to pursue agricultural education..."
+                    />
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* Step 3: Interests & Motivation */}
-            {currentStep === 3 && (
-              <div className="space-y-8 animate-fade-in">
-                <div className="mb-8 text-center">
-                  <h3 className="mb-2 text-2xl font-semibold text-gray-800">Your Interests</h3>
-                  <p className="text-gray-600">What areas of agriculture excite you most?</p>
-                </div>
-
-                <div className="grid grid-cols-1 gap-4 mb-8 md:grid-cols-2 lg:grid-cols-4">
-                  {farmingInterests.map((interest) => (
-                    <label 
-                      key={interest.name} 
-                      className={`cursor-pointer group relative overflow-hidden rounded-2xl p-6 border-2 transition-all duration-300 hover:scale-105 hover:shadow-lg ${
-                        formData.interests.includes(interest.name)
-                          ? 'border-green-500 bg-green-50 shadow-lg' 
-                          : 'border-gray-200 bg-white hover:border-green-300'
-                      }`}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={formData.interests.includes(interest.name)}
-                        onChange={() => handleInterestChange(interest.name)}
-                        className="absolute w-5 h-5 text-green-600 border-gray-300 rounded top-4 right-4 focus:ring-green-500"
-                      />
-                      <div className={`w-12 h-12 rounded-xl mb-4 flex items-center justify-center ${interest.color} transition-all duration-300 group-hover:scale-110`}>
-                        <interest.icon className="w-6 h-6" />
-                      </div>
-                      <h4 className="text-sm font-semibold leading-tight text-gray-800">{interest.name}</h4>
-                    </label>
-                  ))}
-                </div>
-
-                <div className="group">
-                  <label className="block mb-3 text-sm font-semibold text-gray-700">
-                    <Leaf className="inline w-4 h-4 mr-2 text-green-600" />
-                    Why do you want to learn modern farming? (Optional)
-                  </label>
-                  <textarea
-                    name="motivation"
-                    value={formData.motivation}
-                    onChange={handleInputChange}
-                    rows="5"
-                    className="w-full px-6 py-4 text-lg transition-all duration-300 border border-gray-200 resize-none rounded-2xl focus:ring-4 focus:ring-green-100 focus:border-green-500 group-hover:border-green-300"
-                    placeholder="Share your farming goals, dreams, and what motivates you to pursue agricultural education..."
-                  />
-                </div>
-              </div>
-            )}
-
-            {/* Navigation Buttons */}
-            <div className="flex items-center justify-between pt-8 mt-12 border-t border-gray-100">
-              <button
-                type="button"
-                onClick={prevStep}
-                disabled={currentStep === 1}
-                className={`flex items-center space-x-2 px-8 py-4 rounded-2xl font-semibold transition-all duration-300 ${
-                  currentStep === 1 
-                    ? 'text-gray-400 cursor-not-allowed' 
-                    : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'
-                }`}
-              >
-                <ChevronRight className="w-5 h-5 rotate-180" />
-                <span>Previous</span>
-              </button>
-
-              {currentStep < 3 ? (
+              {/* Navigation Buttons */}
+              <div className="flex items-center justify-between pt-8 mt-12 border-t border-gray-100">
                 <button
                   type="button"
-                  onClick={nextStep}
-                  disabled={!isStepValid()}
-                  className={`flex items-center space-x-2 px-8 py-4 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 ${
-                    isStepValid()
-                      ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg hover:shadow-xl' 
-                      : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                  onClick={prevStep}
+                  disabled={currentStep === 1}
+                  className={`flex items-center space-x-2 px-8 py-4 rounded-2xl font-semibold transition-all duration-300 ${
+                    currentStep === 1 
+                      ? 'text-gray-400 cursor-not-allowed' 
+                      : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'
                   }`}
                 >
-                  <span>Continue</span>
-                  <ArrowRight className="w-5 h-5" />
+                  <ChevronRight className="w-5 h-5 rotate-180" />
+                  <span>Previous</span>
                 </button>
-              ) : (
-                <button
-                  type="submit"
-                  onClick={handleSubmit}
-                  disabled={isLoading || !isStepValid()}
-                  className={`flex items-center space-x-2 px-12 py-4 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 ${
-                    isStepValid() && !isLoading
-                      ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg hover:shadow-xl' 
-                      : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                  }`}
-                >
-                  {isLoading ? (
-                    <>
-                      <div className="w-5 h-5 border-b-2 border-white rounded-full animate-spin"></div>
-                      <span>Submitting...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-5 h-5" />
-                      <span>Start Your Journey</span>
-                    </>
-                  )}
-                </button>
-              )}
-            </div>
+
+                {currentStep < 3 ? (
+                  <button
+                    type="button"
+                    onClick={nextStep}
+                    disabled={!isStepValid()}
+                    className={`flex items-center space-x-2 px-8 py-4 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 ${
+                      isStepValid()
+                        ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg hover:shadow-xl' 
+                        : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                    }`}
+                  >
+                    <span>Continue</span>
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    disabled={isLoading || !isStepValid()}
+                    className={`flex items-center space-x-2 px-12 py-4 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 ${
+                      isStepValid() && !isLoading
+                        ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg hover:shadow-xl' 
+                        : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                    }`}
+                  >
+                    {isLoading ? (
+                      <>
+                        <div className="w-5 h-5 border-b-2 border-white rounded-full animate-spin"></div>
+                        <span>Submitting...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5" />
+                        <span>Start Your Journey</span>
+                      </>
+                    )}
+                  </button>
+                )}
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -675,7 +792,7 @@ export default function EnhancedRegistrationForm() {
             </div>
             <p className="mb-8 text-lg text-gray-300">Cultivating the future of sustainable agriculture</p>
             <div className="flex items-center justify-center space-x-8 text-sm text-gray-400">
-              <span>© 2025 Academy</span>
+              <span>© 2025 AgriSiti Academy</span>
               <span>•</span>
               <span>Transforming Agriculture</span>
               <span>•</span>
